@@ -1,5 +1,5 @@
 # Product Finder App
-[![Swift 5](https://img.shields.io/badge/Swift-5.x-green.svg?style=flat)](https://swift.org)[![Xcode 15.0](https://img.shields.io/badge/Xcode-15.0-orange.svg?style=flat)](https://developer.apple.com/xcode/) [![SPM](https://img.shields.io/badge/Swift Package Manager-Compatible-yellow.svg?style=flat)](https://cocoapods.org) [![License](https://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://github.com/rbarramu/productFinder/blob/main/LICENSE)
+[![Swift 5](https://img.shields.io/badge/Swift-5.x-green.svg?style=flat)](https://swift.org)[![Xcode 15.0](https://img.shields.io/badge/Xcode-15.0-orange.svg?style=flat)](https://developer.apple.com/xcode/) [![Swift Package Manager](https://img.shields.io/badge/Swift Package Manager-Compatible-yellow.svg?style=flat)](https://www.swift.org/package-manager/) [![License](https://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://github.com/rbarramu/productFinder/blob/main/LICENSE)
 
 An iOS Application to view details of a product using MVP architecture and Unit Test.
 
