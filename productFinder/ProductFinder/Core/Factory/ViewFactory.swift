@@ -7,6 +7,8 @@ class ViewFactory {
         switch type {
         case .splash:
             viewController = SplashViewController()
+        case .search:
+            viewController = SearchViewController()
         }
 
         return viewController
