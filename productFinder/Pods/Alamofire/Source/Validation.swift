@@ -120,7 +120,7 @@ extension Request {
             }
 
             let error: AFError = {
-                let reason: ErrorReason = .missingContentType(acceptableContentTypes: Array(acceptableContentTypes))
+                let reason: ErrorReason = .missingContentType(acceptableContentTypes: acceptableContentTypes.sorted())
                 return AFError.responseValidationFailed(reason: reason)
             }()
 
@@ -134,7 +134,7 @@ extension Request {
         }
 
         let error: AFError = {
-            let reason: ErrorReason = .unacceptableContentType(acceptableContentTypes: Array(acceptableContentTypes),
+            let reason: ErrorReason = .unacceptableContentType(acceptableContentTypes: acceptableContentTypes.sorted(),
                                                                responseContentType: responseContentType)
 
             return AFError.responseValidationFailed(reason: reason)
@@ -155,9 +155,9 @@ public extension DataRequest {
     ///
     /// If validation fails, subsequent calls to response handlers will have an associated error.
     ///
-    /// - Parameter statusCode: `Sequence` of acceptable response status codes.
+    /// - Parameter acceptableStatusCodes: `Sequence` of acceptable response status codes.
     ///
-    /// - Returns:              The instance.
+    /// - Returns:                         The instance.
     @discardableResult
     func validate<S: Sequence>(statusCode acceptableStatusCodes: S) -> Self where S.Iterator.Element == Int {
         validate { [unowned self] _, response, _ in
@@ -203,9 +203,9 @@ public extension DataStreamRequest {
     ///
     /// If validation fails, subsequent calls to response handlers will have an associated error.
     ///
-    /// - Parameter statusCode: `Sequence` of acceptable response status codes.
+    /// - Parameter acceptableStatusCodes: `Sequence` of acceptable response status codes.
     ///
-    /// - Returns:              The instance.
+    /// - Returns:                         The instance.
     @discardableResult
     func validate<S: Sequence>(statusCode acceptableStatusCodes: S) -> Self where S.Iterator.Element == Int {
         validate { [unowned self] _, response in
@@ -256,9 +256,9 @@ public extension DownloadRequest {
     ///
     /// If validation fails, subsequent calls to response handlers will have an associated error.
     ///
-    /// - Parameter statusCode: `Sequence` of acceptable response status codes.
+    /// - Parameter acceptableStatusCodes: `Sequence` of acceptable response status codes.
     ///
-    /// - Returns:              The instance.
+    /// - Returns:                         The instance.
     @discardableResult
     func validate<S: Sequence>(statusCode acceptableStatusCodes: S) -> Self where S.Iterator.Element == Int {
         validate { [unowned self] _, response, _ in

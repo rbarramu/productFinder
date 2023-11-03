@@ -58,9 +58,9 @@ public struct ResponseCacher {
         case modify((URLSessionDataTask, CachedURLResponse) -> CachedURLResponse?)
     }
 
-    /// Returns a `ResponseCacher` with a follow `Behavior`.
+    /// Returns a `ResponseCacher` with a `.cache` `Behavior`.
     public static let cache = ResponseCacher(behavior: .cache)
-    /// Returns a `ResponseCacher` with a do not follow `Behavior`.
+    /// Returns a `ResponseCacher` with a `.doNotCache` `Behavior`.
     public static let doNotCache = ResponseCacher(behavior: .doNotCache)
 
     /// The `Behavior` of the `ResponseCacher`.
@@ -90,3 +90,21 @@ extension ResponseCacher: CachedResponseHandler {
         }
     }
 }
+
+#if swift(>=5.5)
+    public extension CachedResponseHandler where Self == ResponseCacher {
+        /// Provides a `ResponseCacher` which caches the response, if allowed. Equivalent to `ResponseCacher.cache`.
+        static var cache: ResponseCacher { .cache }
+
+        /// Provides a `ResponseCacher` which does not cache the response. Equivalent to `ResponseCacher.doNotCache`.
+        static var doNotCache: ResponseCacher { .doNotCache }
+
+        /// Creates a `ResponseCacher` which modifies the proposed `CachedURLResponse` using the provided closure.
+        ///
+        /// - Parameter closure: Closure used to modify the `CachedURLResponse`.
+        /// - Returns:           The `ResponseCacher`.
+        static func modify(using closure: @escaping ((URLSessionDataTask, CachedURLResponse) -> CachedURLResponse?)) -> ResponseCacher {
+            ResponseCacher(behavior: .modify(closure))
+        }
+    }
+#endif

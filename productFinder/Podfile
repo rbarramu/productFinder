@@ -6,7 +6,7 @@ target 'ProductFinder' do
   use_frameworks!
 
   # Pods for ProductFinder
-  pod 'Alamofire'
+  pod 'Alamofire', '5.6.3'
   pod 'SwiftFormat/CLI'
   pod 'SwiftLint'
   pod 'lottie-ios'

@@ -22,7 +22,7 @@
 //  THE SOFTWARE.
 //
 
-#if canImport(Combine)
+#if !((os(iOS) && (arch(i386) || arch(arm))) || os(Windows) || os(Linux))
 
     import Combine
     import Dispatch
@@ -89,7 +89,7 @@
                                                    downstream: subscriber))
         }
 
-        private final class Inner<Downstream: Subscriber>: Subscription, Cancellable
+        private final class Inner<Downstream: Subscriber>: Subscription
             where Downstream.Input == Output
         {
             typealias Failure = Downstream.Failure
@@ -203,14 +203,32 @@
                             on: queue)
         }
 
+        @_disfavoredOverload
+        @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+        @available(*, deprecated, message: "Renamed publishDecodable(type:queue:preprocessor:decoder:emptyResponseCodes:emptyRequestMethods).")
+        func publishDecodable<T: Decodable>(type _: T.Type = T.self,
+                                            queue: DispatchQueue = .main,
+                                            preprocessor: DataPreprocessor = DecodableResponseSerializer<T>.defaultDataPreprocessor,
+                                            decoder: DataDecoder = JSONDecoder(),
+                                            emptyResponseCodes: Set<Int> = DecodableResponseSerializer<T>.defaultEmptyResponseCodes,
+                                            emptyResponseMethods: Set<HTTPMethod> = DecodableResponseSerializer<T>.defaultEmptyRequestMethods) -> DataResponsePublisher<T>
+        {
+            publishResponse(using: DecodableResponseSerializer(dataPreprocessor: preprocessor,
+                                                               decoder: decoder,
+                                                               emptyResponseCodes: emptyResponseCodes,
+                                                               emptyRequestMethods: emptyResponseMethods),
+                            on: queue)
+        }
+
         /// Creates a `DataResponsePublisher` for this instance and uses a `DecodableResponseSerializer` to serialize the
         /// response.
         ///
         /// - Parameters:
-        ///   - type:                `Decodable` type to which to decode response `Data`. Inferred from the context by default.
+        ///   - type:                `Decodable` type to which to decode response `Data`. Inferred from the context by
+        ///                          default.
         ///   - queue:               `DispatchQueue` on which the `DataResponse` will be published. `.main` by default.
-        ///   - preprocessor:        `DataPreprocessor` which filters the `Data` before serialization. `PassthroughPreprocessor()`
-        ///                          by default.
+        ///   - preprocessor:        `DataPreprocessor` which filters the `Data` before serialization.
+        ///                          `PassthroughPreprocessor()` by default.
         ///   - decoder:             `DataDecoder` instance used to decode response `Data`. `JSONDecoder()` by default.
         ///   - emptyResponseCodes:  `Set<Int>` of HTTP status codes for which empty responses are allowed. `[204, 205]` by
         ///                          default.
@@ -224,12 +242,12 @@
                                             preprocessor: DataPreprocessor = DecodableResponseSerializer<T>.defaultDataPreprocessor,
                                             decoder: DataDecoder = JSONDecoder(),
                                             emptyResponseCodes: Set<Int> = DecodableResponseSerializer<T>.defaultEmptyResponseCodes,
-                                            emptyResponseMethods: Set<HTTPMethod> = DecodableResponseSerializer<T>.defaultEmptyRequestMethods) -> DataResponsePublisher<T>
+                                            emptyRequestMethods: Set<HTTPMethod> = DecodableResponseSerializer<T>.defaultEmptyRequestMethods) -> DataResponsePublisher<T>
         {
             publishResponse(using: DecodableResponseSerializer(dataPreprocessor: preprocessor,
                                                                decoder: decoder,
                                                                emptyResponseCodes: emptyResponseCodes,
-                                                               emptyRequestMethods: emptyResponseMethods),
+                                                               emptyRequestMethods: emptyRequestMethods),
                             on: queue)
         }
 
@@ -299,7 +317,7 @@
                                                    downstream: subscriber))
         }
 
-        private final class Inner<Downstream: Subscriber>: Subscription, Cancellable
+        private final class Inner<Downstream: Subscriber>: Subscription
             where Downstream.Input == Output
         {
             typealias Failure = Downstream.Failure
@@ -454,7 +472,7 @@
                                                    downstream: subscriber))
         }
 
-        private final class Inner<Downstream: Subscriber>: Subscription, Cancellable
+        private final class Inner<Downstream: Subscriber>: Subscription
             where Downstream.Input == Output
         {
             typealias Failure = Downstream.Failure
@@ -555,7 +573,7 @@
                             on: queue)
         }
 
-        /// Creates a `DataResponsePublisher` for this instance and uses a `StringResponseSerializer` to serialize the
+        /// Creates a `DownloadResponsePublisher` for this instance and uses a `StringResponseSerializer` to serialize the
         /// response.
         ///
         /// - Parameters:
@@ -585,22 +603,9 @@
                             on: queue)
         }
 
-        /// Creates a `DataResponsePublisher` for this instance and uses a `DecodableResponseSerializer` to serialize the
-        /// response.
-        ///
-        /// - Parameters:
-        ///   - type:                `Decodable` type to which to decode response `Data`. Inferred from the context by default.
-        ///   - queue:               `DispatchQueue` on which the `DataResponse` will be published. `.main` by default.
-        ///   - preprocessor:        `DataPreprocessor` which filters the `Data` before serialization. `PassthroughPreprocessor()`
-        ///                          by default.
-        ///   - decoder:             `DataDecoder` instance used to decode response `Data`. `JSONDecoder()` by default.
-        ///   - emptyResponseCodes:  `Set<Int>` of HTTP status codes for which empty responses are allowed. `[204, 205]` by
-        ///                          default.
-        ///   - emptyRequestMethods: `Set<HTTPMethod>` of `HTTPMethod`s for which empty responses are allowed, regardless of
-        ///                          status code. `[.head]` by default.
-        ///
-        /// - Returns:               The `DownloadResponsePublisher`.
+        @_disfavoredOverload
         @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+        @available(*, deprecated, message: "Renamed publishDecodable(type:queue:preprocessor:decoder:emptyResponseCodes:emptyRequestMethods).")
         func publishDecodable<T: Decodable>(type _: T.Type = T.self,
                                             queue: DispatchQueue = .main,
                                             preprocessor: DataPreprocessor = DecodableResponseSerializer<T>.defaultDataPreprocessor,
@@ -612,6 +617,36 @@
                                                                decoder: decoder,
                                                                emptyResponseCodes: emptyResponseCodes,
                                                                emptyRequestMethods: emptyResponseMethods),
+                            on: queue)
+        }
+
+        /// Creates a `DownloadResponsePublisher` for this instance and uses a `DecodableResponseSerializer` to serialize
+        /// the response.
+        ///
+        /// - Parameters:
+        ///   - type:                `Decodable` type to which to decode response `Data`. Inferred from the context by default.
+        ///   - queue:               `DispatchQueue` on which the `DataResponse` will be published. `.main` by default.
+        ///   - preprocessor:        `DataPreprocessor` which filters the `Data` before serialization.
+        ///                          `PassthroughPreprocessor()` by default.
+        ///   - decoder:             `DataDecoder` instance used to decode response `Data`. `JSONDecoder()` by default.
+        ///   - emptyResponseCodes:  `Set<Int>` of HTTP status codes for which empty responses are allowed. `[204, 205]` by
+        ///                          default.
+        ///   - emptyRequestMethods: `Set<HTTPMethod>` of `HTTPMethod`s for which empty responses are allowed, regardless
+        ///                          of status code. `[.head]` by default.
+        ///
+        /// - Returns:               The `DownloadResponsePublisher`.
+        @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+        func publishDecodable<T: Decodable>(type _: T.Type = T.self,
+                                            queue: DispatchQueue = .main,
+                                            preprocessor: DataPreprocessor = DecodableResponseSerializer<T>.defaultDataPreprocessor,
+                                            decoder: DataDecoder = JSONDecoder(),
+                                            emptyResponseCodes: Set<Int> = DecodableResponseSerializer<T>.defaultEmptyResponseCodes,
+                                            emptyRequestMethods: Set<HTTPMethod> = DecodableResponseSerializer<T>.defaultEmptyRequestMethods) -> DownloadResponsePublisher<T>
+        {
+            publishResponse(using: DecodableResponseSerializer(dataPreprocessor: preprocessor,
+                                                               decoder: decoder,
+                                                               emptyResponseCodes: emptyResponseCodes,
+                                                               emptyRequestMethods: emptyRequestMethods),
                             on: queue)
         }
     }
