@@ -34,3 +34,29 @@ extension UIViewController {
         }
     }
 }
+
+// MARK: - Activity Indicator
+
+public protocol ActivityIndicatorPresenter {
+    var activityIndicator: UIActivityIndicatorView { get }
+
+    func showActivityIndicator()
+    func hideActivityIndicator()
+}
+
+public extension ActivityIndicatorPresenter where Self: UIViewController {
+    func showActivityIndicator() {
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.style = .large
+        view.addSubview(activityIndicator)
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.startAnimating()
+    }
+
+    func hideActivityIndicator() {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+        }
+    }
+}

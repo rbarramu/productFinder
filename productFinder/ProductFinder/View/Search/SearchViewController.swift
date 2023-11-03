@@ -2,10 +2,30 @@ import Lottie
 import UIKit
 
 final class SearchViewController: UIViewController {
+    // MARK: - Private Properties
+
     private let searchController = UISearchController(searchResultsController: nil)
     private let stackView = UIStackView(frame: .zero)
     private let titleLabel = UILabel()
     private let animationView = AnimationView()
+    private var presenter: SearchPresenterProtocol?
+
+    internal var activityIndicator = UIActivityIndicatorView(style: .large)
+
+    // MARK: - Public Properties
+
+    var viewModel: SearchItemViewModel?
+    var value = Constants.empty
+
+    // MARK: - Initialization
+
+    convenience init(
+        presenter: SearchPresenterProtocol
+    ) {
+        self.init()
+        self.presenter = presenter
+        presenter.attach(view: self)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,11 +137,37 @@ extension SearchViewController: UISearchResultsUpdating {
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_: UISearchBar, textDidChange _: String) {}
 
-    func searchBarSearchButtonClicked(_: UISearchBar) {}
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text else { return }
+
+        Task {
+            await presenter?.fetchProduct(value: text)
+        }
+    }
 
     func searchBarTextDidBeginEditing(_: UISearchBar) {}
 
     func searchBarCancelButtonClicked(_: UISearchBar) {
         navigationController?.navigationBar.prefersLargeTitles = true
+    }
+}
+
+extension SearchViewController: SearchViewProtocol {
+    func showError(type _: APIError) {
+        print("error")
+    }
+
+    func goToItem(viewModel: SearchItemViewModel) {
+        print(viewModel)
+    }
+
+    func showLoading(status: Bool) {
+        DispatchQueue.main.async {
+            guard status else {
+                self.hideActivityIndicator()
+                return
+            }
+            self.showActivityIndicator()
+        }
     }
 }
