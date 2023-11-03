@@ -6,10 +6,10 @@ target 'ProductFinder' do
   use_frameworks!
 
   # Pods for ProductFinder
-  pod 'Alamofire'
   pod 'SwiftFormat/CLI'
   pod 'SwiftLint'
   pod 'lottie-ios'
+  pod 'Mimic', '1.0.0'
 
   target 'ProductFinderTests' do
     inherit! :search_paths

@@ -1,3 +1,0 @@
-enum ViewFactoryType {
-    case splash
-}

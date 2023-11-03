@@ -45,9 +45,12 @@ final class SplashViewController: UIViewController {
     private func timeWait() {
         let when = DispatchTime.now() + 2.5
         DispatchQueue.main.asyncAfter(deadline: when) {
-            self.showDashboard()
+            self.showSearchView()
         }
     }
 
-    private func showDashboard() {}
+    private func showSearchView() {
+        let viewController = ViewFactory(serviceLocator: ProductFinderServiceLocator()).viewController(type: .search)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
 }
