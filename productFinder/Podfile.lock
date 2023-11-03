@@ -1,28 +1,28 @@
 PODS:
-  - Alamofire (5.6.3)
   - lottie-ios (3.2.3)
+  - Mimic (1.0.0)
   - SwiftFormat/CLI (0.48.11)
   - SwiftLint (0.43.1)
 
 DEPENDENCIES:
-  - Alamofire (= 5.6.3)
   - lottie-ios
+  - Mimic (= 1.0.0)
   - SwiftFormat/CLI
   - SwiftLint
 
 SPEC REPOS:
   trunk:
-    - Alamofire
     - lottie-ios
+    - Mimic
     - SwiftFormat
     - SwiftLint
 
 SPEC CHECKSUMS:
-  Alamofire: 8b7a946e9db6f76e93eaa0d4c84e3751633959c9
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
+  Mimic: 8704fb8e08b18874e464950aeff31caa5884f55a
   SwiftFormat: 938e5865a118c49d63c7a290ddad86335f9e585f
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
 
-PODFILE CHECKSUM: 9434228feaa30cd4078e2d96436c426bedf996ee
+PODFILE CHECKSUM: cd4806cb7eb4a5488546378f4ef1a8086e53f85a
 
 COCOAPODS: 1.10.1
