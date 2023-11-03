@@ -74,7 +74,7 @@ final class SearchViewController: UIViewController {
             stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
 
-        stackView.axis = .vertical
+        stackView.axis = UIWindow.isLandscape ? .horizontal : .vertical
         stackView.spacing = SearchConstants.Insets.stackSpacing
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
