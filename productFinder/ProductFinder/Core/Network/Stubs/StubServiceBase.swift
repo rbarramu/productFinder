@@ -60,7 +60,14 @@ class StubServiceBase<T, D>: NSObject {
         }
     }
 
-    func addStub(url: String, fileName: String, method: MimicHTTPMethod, dataType: DataType? = nil, code: Int? = nil, delay: TimeInterval = 1) {
+    func addStub(
+        url: String,
+        fileName: String,
+        method: MimicHTTPMethod,
+        dataType: DataType? = nil,
+        code: Int? = nil,
+        delay: TimeInterval = 1
+    ) {
         let data = readData(dataType: dataType ?? .array, fileName: fileName)
         Mimic.mimic(
             request: request(with: method, url: url),

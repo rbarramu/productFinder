@@ -10,12 +10,11 @@ final class SearchViewController: UIViewController {
     private let animationView = AnimationView()
     private var presenter: SearchPresenterProtocol?
 
-    internal var activityIndicator = UIActivityIndicatorView(style: .large)
-
     // MARK: - Public Properties
 
     var viewModel: SearchItemViewModel?
     var value = Constants.empty
+    var activityIndicator = UIActivityIndicatorView(style: .large)
 
     // MARK: - Initialization
 
@@ -153,13 +152,9 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 extension SearchViewController: SearchViewProtocol {
-    func showError(type _: APIError) {
-        print("error")
-    }
+    func showError(type _: APIError) {}
 
-    func goToItem(viewModel: SearchItemViewModel) {
-        print(viewModel)
-    }
+    func goToItem(viewModel _: SearchItemViewModel) {}
 
     func showLoading(status: Bool) {
         DispatchQueue.main.async {

@@ -1,8 +1,7 @@
-class SearchPresenter: SearchPresenterProtocol {
+final class SearchPresenter: SearchPresenterProtocol {
     private var view: SearchViewProtocol?
     private let fetchProductsUseCase: FetchProductsUseCase
     private let searchItemMapper: Mapper<SearchItemViewModel, SearchItem>
-    var searchItem = [SearchItemViewModel]()
 
     func attach(view: SearchViewProtocol) {
         self.view = view
@@ -22,12 +21,13 @@ class SearchPresenter: SearchPresenterProtocol {
         do {
             let result = try await fetchProductsUseCase.fetch(value: value)
             let viewModel = searchItemMapper.reverseMap(value: result)
-
             view?.showLoading(status: false)
             view?.goToItem(viewModel: viewModel)
-        } catch {
+        } catch let error as APIError {
             view?.showLoading(status: false)
-            view?.showError(type: error as! APIError)
+            view?.showError(type: error)
+        } catch {
+            // Catch any other errors
         }
     }
 }

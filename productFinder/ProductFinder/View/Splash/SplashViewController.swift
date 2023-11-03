@@ -50,7 +50,7 @@ final class SplashViewController: UIViewController {
     }
 
     private func showSearchView() {
-        let viewController = ViewFactory.viewController(type: .search)
+        let viewController = ViewFactory(serviceLocator: ProductFinderServiceLocator()).viewController(type: .search)
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

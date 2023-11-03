@@ -1,6 +1,9 @@
 import Foundation
 
-final class ProductFinderNetworkRestApi: NetworkBaseRestApi<Endpoint.ProductFinder, ProductFinderNetwork>, ProductFinderRestApi {
+final class ProductFinderNetworkRestApi: NetworkBaseRestApi<Endpoint.ProductFinder,
+    ProductFinderNetwork>,
+    ProductFinderRestApi
+{
     func fetchProducts(value: String) async throws -> SearchItem {
         let url = String(format: network.url(for: .search), value)
 
