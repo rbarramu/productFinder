@@ -12,7 +12,6 @@ final class SearchViewController: UIViewController {
 
     // MARK: - Public Properties
 
-    var viewModel: SearchItemViewModel?
     var value = Constants.empty
     var activityIndicator = UIActivityIndicatorView(style: .large)
 
@@ -154,7 +153,14 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: SearchViewProtocol {
     func showError(type _: APIError) {}
 
-    func goToItem(viewModel _: SearchItemViewModel) {}
+    func goToItem(viewModel: SearchItemViewModel) {
+        guard
+            let viewController = ViewFactory(serviceLocator: ProductFinderServiceLocator()).viewController(type: .list) as? ListProductsViewController
+        else { return }
+
+        viewController.viewModel = viewModel
+        navigationController?.pushViewController(viewController, animated: true)
+    }
 
     func showLoading(status: Bool) {
         DispatchQueue.main.async {

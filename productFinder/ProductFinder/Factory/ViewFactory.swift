@@ -1,6 +1,6 @@
 import UIKit
 
-final class ViewFactory {
+class ViewFactory {
     private let serviceLocator: ProductFinderServiceLocator
 
     init(serviceLocator: ProductFinderServiceLocator) {
@@ -19,6 +19,11 @@ final class ViewFactory {
                     fetchProductsUseCase: serviceLocator.fetchProductsUseCase,
                     searchItemMapper: serviceLocator.fetchProductsMapper
                 )
+            )
+        case .list:
+            viewController = ListProductsViewController(
+                dataSource: ListProductsDataSource(),
+                delegate: ListProductsDelegate()
             )
         }
 
