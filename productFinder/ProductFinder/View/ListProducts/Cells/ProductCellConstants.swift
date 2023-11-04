@@ -1,22 +1,14 @@
 import UIKit
 
 enum ProductCellConstants {
-    enum Insets {
-        static let stackContainerSpace: CGFloat = 32.0
-        static let cornerRadius: CGFloat = 16.0
-
-        enum ContainerView {
-            static let leading: CGFloat = 36
-            static let trailing: CGFloat = -36
-            static let top: CGFloat = 2
-            static let bottom: CGFloat = -2
-        }
-
-        enum StackContainer {
-            static let leading: CGFloat = 34
-            static let trailing: CGFloat = -34
-            static let top: CGFloat = 25
-            static let bottom: CGFloat = -25
-        }
+    enum Text {
+        static let badgeText = "Mercado Pago"
     }
+
+    static let stackContainerSpace: CGFloat = 20
+    static let cornerRadius: CGFloat = 16.0
+    static let containerViewInset = UIEdgeInsets(top: 14, left: 12, bottom: 14, right: 12)
+    static let anchorStackContainer: CGFloat = 8
+    static let anchorImageProductView: CGFloat = 100
+    static let stackSpacing: CGFloat = 4
 }

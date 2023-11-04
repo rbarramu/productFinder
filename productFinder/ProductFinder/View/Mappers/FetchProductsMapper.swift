@@ -8,7 +8,10 @@ final class FetchProductsMapper: Mapper<SearchItemViewModel, SearchItem> {
                 id: product.id,
                 title: product.title,
                 price: product.price,
-                thumbnail: product.thumbnail
+                thumbnail: product.thumbnail,
+                currencyId: product.currencyId,
+                originalPrice: product.originalPrice,
+                acceptsMercadopago: product.acceptsMercadopago
             )
             products.append(productViewModel)
         }

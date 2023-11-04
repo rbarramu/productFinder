@@ -2,16 +2,11 @@ import UIKit
 
 enum ListProductsConstants {
     enum Texts {
-        static let title = "Productos encontrados"
+        static let title = "Buscaste: %@"
     }
 
     enum Insets {
         static let estimatedRowHeight: CGFloat = 70
-        static let tableViewInsets = UIEdgeInsets(
-            top: CGFloat(36),
-            left: .zero,
-            bottom: CGFloat(36),
-            right: .zero
-        )
+        static let tableViewInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 }

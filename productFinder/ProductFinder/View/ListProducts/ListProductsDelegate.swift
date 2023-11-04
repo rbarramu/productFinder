@@ -1,8 +1,6 @@
 import UIKit
 
-final class ListProductsDelegate: NSObject {
-    var cells: [ListProductsCellType] = ListProductsCellType.default
-}
+final class ListProductsDelegate: NSObject {}
 
 extension ListProductsDelegate: UITableViewDelegate {
     func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {

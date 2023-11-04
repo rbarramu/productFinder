@@ -1,6 +1,6 @@
 import UIKit
 
-class ViewFactory {
+final class ViewFactory {
     private let serviceLocator: ProductFinderServiceLocator
 
     init(serviceLocator: ProductFinderServiceLocator) {

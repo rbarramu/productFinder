@@ -11,6 +11,7 @@ final class ListProductsViewController: UIViewController {
     // MARK: - Public Properties
 
     var viewModel: SearchItemViewModel?
+    var searchValue: String?
     var activityIndicator = UIActivityIndicatorView(style: .large)
 
     // MARK: - Initialization
@@ -19,6 +20,7 @@ final class ListProductsViewController: UIViewController {
         self.init()
         self.dataSource = dataSource
         self.delegate = delegate
+        dataSource.viewController = self
     }
 
     override func viewDidLoad() {
@@ -29,13 +31,12 @@ final class ListProductsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // view.backgroundColor = .lightGray
         navigationController?.setNavigationBarHidden(false, animated: false)
         configureNavigationBar(
-            largeTitleColor: .white,
-            backgroundColor: .yellow,
-            tintColor: .white,
-            title: ListProductsConstants.Texts.title,
+            largeTitleColor: .black,
+            backgroundColor: Theme.current.primaryBackground,
+            tintColor: .black,
+            title: String(format: ListProductsConstants.Texts.title, searchValue ?? Constants.empty),
             preferredLargeTitle: true
         )
         tableView.reloadData()
@@ -44,12 +45,12 @@ final class ListProductsViewController: UIViewController {
     private func prepareTableView() {
         tableView.dataSource = dataSource
         tableView.delegate = delegate
-        tableView.backgroundColor = .lightGray
-        tableView.showsVerticalScrollIndicator = false
-        tableView.separatorStyle = .singleLine
+        tableView.backgroundColor = Theme.current.primaryLight
+        tableView.showsVerticalScrollIndicator = true
+        tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = ListProductsConstants.Insets.estimatedRowHeight
-        tableView.isScrollEnabled = false
+        tableView.isScrollEnabled = true
         tableView.contentInset = ListProductsConstants.Insets.tableViewInsets
         view.addAutoLayout(subview: tableView)
         Layout.pin(view: tableView, to: view)
