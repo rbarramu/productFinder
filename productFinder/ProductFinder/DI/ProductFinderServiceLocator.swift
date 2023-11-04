@@ -24,9 +24,17 @@ final class ProductFinderServiceLocator {
         FetchProductsUseCase(repository: repository)
     }
 
+    var fetchProductDetailUseCase: FetchProductDetailUseCase {
+        FetchProductDetailUseCase(repository: repository)
+    }
+
     // MARK: - Mappers
 
     var fetchProductsMapper: FetchProductsMapper {
         FetchProductsMapper()
+    }
+
+    var fetchProductDetailMapper: FetchProductDetailMapper {
+        FetchProductDetailMapper()
     }
 }

@@ -1,11 +1,9 @@
 import Foundation
 
-struct APIItemDescription: Decodable {
-    let id: String
+struct ItemDescription: Decodable {
     let text: String
 
     private enum CodingKeys: String, CodingKey {
-        case id
         case text = "plain_text"
     }
 }

@@ -10,6 +10,7 @@ target 'ProductFinder' do
   pod 'SwiftLint'
   pod 'lottie-ios'
   pod 'Mimic', '1.0.0'
+  pod 'Kingfisher'
 
   target 'ProductFinderTests' do
     inherit! :search_paths

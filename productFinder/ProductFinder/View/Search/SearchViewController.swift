@@ -12,8 +12,7 @@ final class SearchViewController: UIViewController {
 
     // MARK: - Public Properties
 
-    var viewModel: SearchItemViewModel?
-    var value = Constants.empty
+    var searchValue = Constants.empty
     var activityIndicator = UIActivityIndicatorView(style: .large)
 
     // MARK: - Initialization
@@ -56,7 +55,7 @@ final class SearchViewController: UIViewController {
         navigationItem.hidesBackButton = true
         configureNavigationBar(
             largeTitleColor: .black,
-            backgroundColor: .yellow,
+            backgroundColor: Theme.current.primaryBackground,
             tintColor: .black,
             title: SearchConstants.Texts.title,
             preferredLargeTitle: true
@@ -138,7 +137,7 @@ extension SearchViewController: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text else { return }
-
+        searchValue = text
         Task {
             await presenter?.fetchProduct(value: text)
         }
@@ -154,7 +153,17 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: SearchViewProtocol {
     func showError(type _: APIError) {}
 
-    func goToItem(viewModel _: SearchItemViewModel) {}
+    func goToItem(viewModel: SearchItemViewModel) {
+        guard
+            let viewController = ViewFactory(
+                serviceLocator: ProductFinderServiceLocator()
+            ).viewController(type: .list) as? ListProductsViewController
+        else { return }
+
+        viewController.viewModel = viewModel
+        viewController.searchValue = searchValue
+        navigationController?.pushViewController(viewController, animated: true)
+    }
 
     func showLoading(status: Bool) {
         DispatchQueue.main.async {
