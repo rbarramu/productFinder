@@ -15,4 +15,13 @@ final class ProductFinderApiRepository: ProductFinderRepository {
             throw error
         }
     }
+
+    func fetchProductDetail(id: String) async throws -> ItemDescription {
+        do {
+            let response: ItemDescription = try await restApi.fetchProductDetail(id: id)
+            return response
+        } catch {
+            throw error
+        }
+    }
 }

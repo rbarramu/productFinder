@@ -5,6 +5,6 @@ protocol ListProductsViewProtocol: ActivityIndicatorPresenter {
     var searchValue: String? { get set }
 
     func showError(type: APIError)
-    func goToSelectedProduct(viewModel: SearchItemViewModel)
+    func goToSelectedProduct(descriptionViewModel: ItemDescriptionViewModel)
     func showLoading(status: Bool)
 }

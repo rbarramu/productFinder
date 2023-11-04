@@ -7,6 +7,7 @@ final class ListProductsViewController: UIViewController {
     private var dataSource: ListProductsDataSource?
     // swiftlint:disable:next weak_delegate
     private var delegate: ListProductsDelegate?
+    private var presenter: ListProductsPresenterProtocol?
 
     // MARK: - Public Properties
 
@@ -16,11 +17,18 @@ final class ListProductsViewController: UIViewController {
 
     // MARK: - Initialization
 
-    convenience init(dataSource: ListProductsDataSource, delegate: ListProductsDelegate) {
+    convenience init(
+        dataSource: ListProductsDataSource,
+        delegate: ListProductsDelegate,
+        presenter: ListProductsPresenterProtocol
+    ) {
         self.init()
         self.dataSource = dataSource
         self.delegate = delegate
+        self.presenter = presenter
         dataSource.viewController = self
+        delegate.viewController = self
+        presenter.attach(view: self)
     }
 
     override func viewDidLoad() {
@@ -60,12 +68,29 @@ final class ListProductsViewController: UIViewController {
         let productCellIdentifier = String(describing: ProductCell.self)
         tableView.register(ProductCell.self, forCellReuseIdentifier: productCellIdentifier)
     }
+
+    func routeToDetail(indexPath: IndexPath) {
+        guard let itemId = viewModel?.results[indexPath.row].id else { return }
+        Task {
+            await presenter?.fetchDetailProduct(id: itemId)
+        }
+    }
 }
 
 extension ListProductsViewController: ListProductsViewProtocol {
     func showError(type _: APIError) {}
 
-    func goToSelectedProduct(viewModel _: SearchItemViewModel) {}
+    func goToSelectedProduct(descriptionViewModel _: ItemDescriptionViewModel) {
+//        guard
+//            let viewController = ViewFactory(
+//                serviceLocator: ProductFinderServiceLocator()
+//            ).viewController(type: .product) as? ProductViewController
+//        else { return }
+//
+//        viewController.viewModel = viewModel
+//        viewController.descriptionViewModel = descriptionViewModel
+//        navigationController?.pushViewController(viewController, animated: true)
+    }
 
     func showLoading(status: Bool) {
         DispatchQueue.main.async {
