@@ -51,7 +51,7 @@ public extension ActivityIndicatorPresenter where Self: UIViewController {
         activityIndicator.style = .large
         activityIndicator.backgroundColor = Theme.current.primaryBackground
         activityIndicator.layer.cornerRadius = 6
-        
+
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),

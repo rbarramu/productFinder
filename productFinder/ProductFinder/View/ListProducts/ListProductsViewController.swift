@@ -38,8 +38,19 @@ final class ListProductsViewController: UIViewController {
         registerCells()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        navigationItem.title = Constants.empty
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setUpNavigationBar()
+        tableView.reloadData()
+    }
+
+    private func setUpNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
         configureNavigationBar(
             largeTitleColor: .black,
@@ -48,7 +59,6 @@ final class ListProductsViewController: UIViewController {
             title: String(format: ListProductsConstants.Texts.title, searchValue ?? Constants.empty),
             preferredLargeTitle: true
         )
-        tableView.reloadData()
     }
 
     private func prepareTableView() {

@@ -40,7 +40,7 @@ final class ProductDetailViewController: UIViewController {
             largeTitleColor: .black,
             backgroundColor: Theme.current.primaryBackground,
             tintColor: .black,
-            title: String(format: ProductDetailConstants.Texts.title),
+            title: Constants.empty,
             preferredLargeTitle: true
         )
         tableView.reloadData()
@@ -53,9 +53,9 @@ final class ProductDetailViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = true
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = ListProductsConstants.Insets.estimatedRowHeight
+        tableView.estimatedRowHeight = ProductDetailConstants.Insets.estimatedRowHeight
         tableView.isScrollEnabled = true
-        tableView.contentInset = ListProductsConstants.Insets.tableViewInsets
+        tableView.contentInset = ProductDetailConstants.Insets.tableViewInsets
         view.addAutoLayout(subview: tableView)
         Layout.pin(view: tableView, to: view)
     }

@@ -2,7 +2,6 @@ import UIKit
 
 enum ProductDetailConstants {
     enum Texts {
-        static let title = "Producto seleccionado"
         static let descriptionTitle = "Descripción"
     }
 
