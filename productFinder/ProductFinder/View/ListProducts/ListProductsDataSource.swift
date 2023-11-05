@@ -26,7 +26,6 @@ extension ListProductsDataSource: UITableViewDataSource {
             title: viewModel.results[indexPath.row].title,
             price: viewModel.results[indexPath.row].price,
             originalPrice: viewModel.results[indexPath.row].originalPrice,
-            currencyId: viewModel.results[indexPath.row].currencyId,
             thumbnail: viewModel.results[indexPath.row].thumbnail,
             placeholderImage: ProductFinderImages.Icons.placeholderImage,
             acceptsMercadopago: viewModel.results[indexPath.row].acceptsMercadopago

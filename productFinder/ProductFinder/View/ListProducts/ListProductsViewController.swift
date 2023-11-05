@@ -12,6 +12,7 @@ final class ListProductsViewController: UIViewController {
     // MARK: - Public Properties
 
     var viewModel: SearchItemViewModel?
+    var selectedViewModel: ItemViewModel?
     var searchValue: String?
     var activityIndicator = UIActivityIndicatorView(style: .large)
 
@@ -70,9 +71,10 @@ final class ListProductsViewController: UIViewController {
     }
 
     func routeToDetail(indexPath: IndexPath) {
-        guard let itemId = viewModel?.results[indexPath.row].id else { return }
+        guard let selectedItem = viewModel?.results[indexPath.row] else { return }
+        selectedViewModel = selectedItem
         Task {
-            await presenter?.fetchDetailProduct(id: itemId)
+            await presenter?.fetchDetailProduct(id: selectedItem.id)
         }
     }
 }
@@ -80,16 +82,15 @@ final class ListProductsViewController: UIViewController {
 extension ListProductsViewController: ListProductsViewProtocol {
     func showError(type _: APIError) {}
 
-    func goToSelectedProduct(descriptionViewModel _: ItemDescriptionViewModel) {
-//        guard
-//            let viewController = ViewFactory(
-//                serviceLocator: ProductFinderServiceLocator()
-//            ).viewController(type: .product) as? ProductViewController
-//        else { return }
-//
-//        viewController.viewModel = viewModel
-//        viewController.descriptionViewModel = descriptionViewModel
-//        navigationController?.pushViewController(viewController, animated: true)
+    func goToSelectedProduct(itemDescriptionViewModel: ItemDescriptionViewModel) {
+        guard let viewController = ViewFactory(
+            serviceLocator: ProductFinderServiceLocator()
+        ).viewController(type: .productDetail) as? ProductDetailViewController
+        else { return }
+
+        viewController.itemViewModel = selectedViewModel
+        viewController.itemDescriptionViewModel = itemDescriptionViewModel
+        navigationController?.pushViewController(viewController, animated: true)
     }
 
     func showLoading(status: Bool) {

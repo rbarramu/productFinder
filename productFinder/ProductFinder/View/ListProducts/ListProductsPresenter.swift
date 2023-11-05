@@ -22,7 +22,7 @@ final class ListProductsPresenter: ListProductsPresenterProtocol {
             let result = try await fetchProductDetailUseCase.fetch(id: id)
             let viewModel = itemDescriptionMapper.reverseMap(value: result)
             view?.showLoading(status: false)
-            view?.goToSelectedProduct(descriptionViewModel: viewModel)
+            view?.goToSelectedProduct(itemDescriptionViewModel: viewModel)
         } catch let error as APIError {
             view?.showLoading(status: false)
             view?.showError(type: error)
