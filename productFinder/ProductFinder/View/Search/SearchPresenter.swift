@@ -19,7 +19,8 @@ final class SearchPresenter: SearchPresenterProtocol {
     func fetchProduct(value: String) async {
         view?.showLoading(status: true)
         do {
-            let result = try await fetchProductsUseCase.fetch(value: value)
+            let valueFormat = value.replacingOccurrences(of: Constants.space, with: Constants.empty)
+            let result = try await fetchProductsUseCase.fetch(value: valueFormat)
             let viewModel = searchItemMapper.reverseMap(value: result)
             view?.showLoading(status: false)
             view?.goToItem(viewModel: viewModel)
@@ -27,7 +28,8 @@ final class SearchPresenter: SearchPresenterProtocol {
             view?.showLoading(status: false)
             view?.showError(type: error)
         } catch {
-            // Catch any other errors
+            view?.showLoading(status: false)
+            view?.showError(type: .defaultError)
         }
     }
 }

@@ -27,7 +27,8 @@ final class ListProductsPresenter: ListProductsPresenterProtocol {
             view?.showLoading(status: false)
             view?.showError(type: error)
         } catch {
-            // Catch any other errors
+            view?.showLoading(status: false)
+            view?.showError(type: .defaultError)
         }
     }
 }

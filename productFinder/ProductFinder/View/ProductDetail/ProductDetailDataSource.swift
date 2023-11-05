@@ -58,7 +58,10 @@ extension ProductDetailDataSource: UITableViewDataSource {
         guard let viewModel = viewController?.itemViewModel else { return UITableViewCell() }
 
         let viewData = TitleCellViewData(title: viewModel.title)
-        let viewStyle = TitleCellViewStyle(titleFont: UIFont.systemFont(ofSize: 24, weight: .regular))
+        let viewStyle = TitleCellViewStyle(titleFont: UIFont.systemFont(
+            ofSize: ProductDetailConstants.FontSize.title,
+            weight: .regular
+        ))
 
         cell.setup(viewData: viewData, viewStyle: viewStyle)
         return cell
@@ -79,7 +82,10 @@ extension ProductDetailDataSource: UITableViewDataSource {
             title: Formatter.format(float: originalPrice, style: .amountCLP),
             isStrikethrough: true
         )
-        let viewStyle = TitleCellViewStyle(titleFont: UIFont.systemFont(ofSize: 18, weight: .regular))
+        let viewStyle = TitleCellViewStyle(titleFont: UIFont.systemFont(
+            ofSize: ProductDetailConstants.FontSize.originalPrice,
+            weight: .regular
+        ))
 
         cell.setup(viewData: viewData, viewStyle: viewStyle)
         return cell
@@ -97,7 +103,10 @@ extension ProductDetailDataSource: UITableViewDataSource {
             float: viewModel.price,
             style: .amountCLP
         ))
-        let viewStyle = TitleCellViewStyle(titleFont: UIFont.systemFont(ofSize: 24, weight: .bold))
+        let viewStyle = TitleCellViewStyle(titleFont: UIFont.systemFont(
+            ofSize: ProductDetailConstants.FontSize.price,
+            weight: .bold
+        ))
 
         cell.setup(viewData: viewData, viewStyle: viewStyle)
         return cell
@@ -115,7 +124,10 @@ extension ProductDetailDataSource: UITableViewDataSource {
         else { return UITableViewCell() }
 
         let viewData = TitleCellViewData(title: ProductDetailConstants.Texts.descriptionTitle)
-        let viewStyle = TitleCellViewStyle(titleFont: UIFont.systemFont(ofSize: 14, weight: .bold))
+        let viewStyle = TitleCellViewStyle(titleFont: UIFont.systemFont(
+            ofSize: ProductDetailConstants.FontSize.descriptionTitle,
+            weight: .bold
+        ))
 
         cell.setup(viewData: viewData, viewStyle: viewStyle)
         return cell
@@ -130,7 +142,10 @@ extension ProductDetailDataSource: UITableViewDataSource {
         guard let viewModel = viewController?.itemDescriptionViewModel else { return UITableViewCell() }
 
         let viewData = TitleCellViewData(title: viewModel.text)
-        let viewStyle = TitleCellViewStyle(titleFont: UIFont.systemFont(ofSize: 14, weight: .regular))
+        let viewStyle = TitleCellViewStyle(titleFont: UIFont.systemFont(
+            ofSize: ProductDetailConstants.FontSize.description,
+            weight: .regular
+        ))
 
         cell.setup(viewData: viewData, viewStyle: viewStyle)
         return cell

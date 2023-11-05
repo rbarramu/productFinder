@@ -46,6 +46,8 @@ final class ProductDetailViewController: UIViewController {
         tableView.reloadData()
     }
 
+    // MARK: - Private Methods
+
     private func prepareTableView() {
         tableView.dataSource = dataSource
         tableView.delegate = delegate
@@ -68,9 +70,9 @@ final class ProductDetailViewController: UIViewController {
     }
 }
 
-extension ProductDetailViewController: ProductDetailViewProtocol {
-    func showError(type _: APIError) {}
+// MARK: - ProductDetailViewProtocol
 
+extension ProductDetailViewController: ProductDetailViewProtocol {
     func showLoading(status: Bool) {
         DispatchQueue.main.async {
             guard status else {

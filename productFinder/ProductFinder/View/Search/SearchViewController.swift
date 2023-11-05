@@ -14,6 +14,7 @@ final class SearchViewController: UIViewController {
 
     var searchValue = Constants.empty
     var activityIndicator = UIActivityIndicatorView(style: .large)
+    var errorView = ErrorView()
 
     // MARK: - Initialization
 
@@ -50,11 +51,15 @@ final class SearchViewController: UIViewController {
         coordinator.animate(alongsideTransition: { _ -> Void in
             if UIWindow.isLandscape {
                 self.stackView.axis = .horizontal
+                self.errorView.update(axis: .horizontal)
             } else {
                 self.stackView.axis = .vertical
+                self.errorView.update(axis: .vertical)
             }
         }, completion: nil)
     }
+
+    // MARK: - Private Methods
 
     private func setUpNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
@@ -132,11 +137,15 @@ final class SearchViewController: UIViewController {
     }
 }
 
+// MARK: - UISearchResultsUpdating
+
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
     }
 }
+
+// MARK: - UISearchBarDelegate
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_: UISearchBar, textDidChange _: String) {}
@@ -144,6 +153,7 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text else { return }
         searchValue = text
+        errorView.removeFromSuperview()
         Task {
             await presenter?.fetchProduct(value: text)
         }
@@ -156,10 +166,20 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 
+// MARK: - SearchViewProtocol
+
 extension SearchViewController: SearchViewProtocol {
-    func showError(type _: APIError) {}
+    func showError(type: APIError) {
+        errorView.removeFromSuperview()
+        errorView = ErrorView()
+        errorView.setup(type: type)
+        errorView.delegate = self
+        view.addAutoLayout(subview: errorView)
+        Layout.pin(view: errorView, to: view)
+    }
 
     func goToItem(viewModel: SearchItemViewModel) {
+        errorView.removeFromSuperview()
         guard
             let viewController = ViewFactory(
                 serviceLocator: ProductFinderServiceLocator()
@@ -178,6 +198,16 @@ extension SearchViewController: SearchViewProtocol {
                 return
             }
             self.showActivityIndicator()
+        }
+    }
+}
+
+// MARK: - ErrorViewDelegate
+
+extension SearchViewController: ErrorViewDelegate {
+    func didTap() {
+        Task {
+            await presenter?.fetchProduct(value: searchValue)
         }
     }
 }
