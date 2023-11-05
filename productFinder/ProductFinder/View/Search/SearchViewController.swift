@@ -157,7 +157,7 @@ extension SearchViewController: SearchViewProtocol {
         guard
             let viewController = ViewFactory(
                 serviceLocator: ProductFinderServiceLocator()
-            ).viewController(type: .list) as? ListProductsViewController
+            ).viewController(type: .listProducts) as? ListProductsViewController
         else { return }
 
         viewController.viewModel = viewModel

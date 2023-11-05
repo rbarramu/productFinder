@@ -20,7 +20,7 @@ final class ViewFactory {
                     searchItemMapper: serviceLocator.fetchProductsMapper
                 )
             )
-        case .list:
+        case .listProducts:
             viewController = ListProductsViewController(
                 dataSource: ListProductsDataSource(),
                 delegate: ListProductsDelegate(),
@@ -28,6 +28,11 @@ final class ViewFactory {
                     fetchProductDetailUseCase: serviceLocator.fetchProductDetailUseCase,
                     itemDescriptionMapper: serviceLocator.fetchProductDetailMapper
                 )
+            )
+        case .productDetail:
+            viewController = ProductDetailViewController(
+                dataSource: ProductDetailDataSource(),
+                delegate: ProductDetailDelegate()
             )
         }
 
