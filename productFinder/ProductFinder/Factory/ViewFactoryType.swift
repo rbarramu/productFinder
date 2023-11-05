@@ -1,5 +1,6 @@
 enum ViewFactoryType {
     case splash
     case search
-    case list
+    case listProducts
+    case productDetail
 }

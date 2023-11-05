@@ -133,15 +133,9 @@ class ProductCell: UITableViewCell {
         titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         titleLabel.numberOfLines = .zero
 
-        let currencyFormatter = NumberFormatter()
-        currencyFormatter.numberStyle = .currency
-        currencyFormatter.locale = Locale(identifier: "es_CL")
-        currencyFormatter.currencyCode = viewData.currencyId
-
         if let originalPrice = viewData.originalPrice {
             let attributedText = NSAttributedString(
-                string: currencyFormatter.string(
-                    from: NSNumber(value: originalPrice)) ?? Constants.empty,
+                string: Formatter.format(float: originalPrice, style: .amountCLP),
                 attributes: [.strikethroughStyle: NSUnderlineStyle.single.rawValue]
             )
 
@@ -150,7 +144,7 @@ class ProductCell: UITableViewCell {
             originalPriceLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         }
 
-        priceLabel.text = currencyFormatter.string(from: NSNumber(value: viewData.price))
+        priceLabel.text = Formatter.format(float: viewData.price, style: .amountCLP)
         priceLabel.textColor = .black
         priceLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
     }

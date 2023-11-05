@@ -1,7 +1,7 @@
 class SearchItemViewModel {
-    let results: [ItemListViewModel]
+    let results: [ItemViewModel]
 
-    init(results: [ItemListViewModel]) {
+    init(results: [ItemViewModel]) {
         self.results = results
     }
 }

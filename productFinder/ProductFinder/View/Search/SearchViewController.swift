@@ -29,6 +29,12 @@ final class SearchViewController: UIViewController {
         super.viewDidLoad()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        navigationItem.title = Constants.empty
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -157,7 +163,7 @@ extension SearchViewController: SearchViewProtocol {
         guard
             let viewController = ViewFactory(
                 serviceLocator: ProductFinderServiceLocator()
-            ).viewController(type: .list) as? ListProductsViewController
+            ).viewController(type: .listProducts) as? ListProductsViewController
         else { return }
 
         viewController.viewModel = viewModel

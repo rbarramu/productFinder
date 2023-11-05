@@ -46,11 +46,19 @@ public protocol ActivityIndicatorPresenter {
 
 public extension ActivityIndicatorPresenter where Self: UIViewController {
     func showActivityIndicator() {
+        view.addSubview(activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.style = .large
-        view.addSubview(activityIndicator)
-        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.backgroundColor = Theme.current.primaryBackground
+        activityIndicator.layer.cornerRadius = 6
+
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            activityIndicator.widthAnchor.constraint(equalToConstant: 100),
+            activityIndicator.heightAnchor.constraint(equalToConstant: 100),
+        ])
+
         activityIndicator.startAnimating()
     }
 
