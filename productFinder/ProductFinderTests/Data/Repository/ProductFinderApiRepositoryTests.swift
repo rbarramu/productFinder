@@ -20,7 +20,7 @@ class ProductFinderApiRepositoryTests: TestCase {
     func testGetFetchProductsSuccess() async {
         restApiMock.success = true
 
-        let response = try? await sut.fetchProducts(value: "foo.search")
+        let response = try? await sut.fetchProducts(value: "foo.value")
         XCTAssertNotNil(response)
     }
 
@@ -28,7 +28,7 @@ class ProductFinderApiRepositoryTests: TestCase {
         restApiMock.success = false
 
         do {
-            _ = try await sut.fetchProducts(value: "foo.search")
+            _ = try await sut.fetchProducts(value: "foo.value")
             XCTFail("this line should not be reachable")
         } catch {
             XCTAssertNotNil(error)

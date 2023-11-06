@@ -2,7 +2,6 @@
 
 class ProductFinderRestApiMock: ProductFinderRestApi {
     var success = true
-
     var errorModel: APIError = .defaultError
 
     func fetchProducts(value _: String) async throws -> SearchItem {
