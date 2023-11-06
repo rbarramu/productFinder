@@ -1,4 +1,4 @@
-// import Nimble
+import Nimble
 @testable import ProductFinder
 import XCTest
 
@@ -15,17 +15,17 @@ class DomainNetworkBaseTests: TestCase {
         sut = nil
     }
 
-//    func testUrl() {
-//        #if canImport(Darwin) && (arch(x86_64) || arch(arm64))
-//            expect { _ = self.sut.url(for: .list) }.to(throwAssertion())
-//        #endif
-//    }
-//
-//    func testParameters() {
-//        #if canImport(Darwin) && (arch(x86_64) || arch(arm64))
-//            expect { _ = self.sut.parameters(for: .list, params: nil) }.to(throwAssertion())
-//        #endif
-//    }
+    func testUrl() {
+        #if canImport(Darwin) && (arch(x86_64) || arch(arm64))
+            expect { _ = self.sut.url(for: .search) }.to(throwAssertion())
+        #endif
+    }
+
+    func testParameters() {
+        #if canImport(Darwin) && (arch(x86_64) || arch(arm64))
+            expect { _ = self.sut.parameters(for: .search, params: nil) }.to(throwAssertion())
+        #endif
+    }
 
     func testBaseBFFURL() {
         Environment.all.forEach {

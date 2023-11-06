@@ -6,14 +6,10 @@ class ProductFinderRestApiMock: ProductFinderRestApi {
 
     func fetchProducts(value _: String) async throws -> SearchItem {
         if success {
-            return SearchItem(results: [Item(
-                id: "foo.id",
-                title: "foo.title",
-                price: 0.0,
-                thumbnail: "foo.thumbnail",
-                originalPrice: 0.0,
-                acceptsMercadopago: true
-            )])
+            guard let entity = try? SearchItem.mocked() else {
+                fatalError("Failed to create model")
+            }
+            return entity
         } else {
             throw errorModel
         }
@@ -21,7 +17,10 @@ class ProductFinderRestApiMock: ProductFinderRestApi {
 
     func fetchProductDetail(id _: String) async throws -> ItemDescription {
         if success {
-            return ItemDescription(text: "foo.text")
+            guard let entity = try? ItemDescription.mocked() else {
+                fatalError("Failed to create model")
+            }
+            return entity
         } else {
             throw errorModel
         }
