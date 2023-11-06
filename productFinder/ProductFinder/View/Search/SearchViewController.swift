@@ -1,4 +1,5 @@
 import Lottie
+import os
 import UIKit
 
 final class SearchViewController: UIViewController {
@@ -9,11 +10,16 @@ final class SearchViewController: UIViewController {
     private let titleLabel = UILabel()
     private let animationView = AnimationView()
     private var presenter: SearchPresenterProtocol?
+    private let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier ?? Constants.empty,
+        category: String(describing: SearchViewController.self)
+    )
 
     // MARK: - Public Properties
 
     var searchValue = Constants.empty
     var activityIndicator = UIActivityIndicatorView(style: .large)
+    var errorView = ErrorView()
 
     // MARK: - Initialization
 
@@ -50,11 +56,15 @@ final class SearchViewController: UIViewController {
         coordinator.animate(alongsideTransition: { _ -> Void in
             if UIWindow.isLandscape {
                 self.stackView.axis = .horizontal
+                self.errorView.update(axis: .horizontal)
             } else {
                 self.stackView.axis = .vertical
+                self.errorView.update(axis: .vertical)
             }
         }, completion: nil)
     }
+
+    // MARK: - Private Methods
 
     private func setUpNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
@@ -71,10 +81,8 @@ final class SearchViewController: UIViewController {
     private func prepareSearchController() {
         guard searchController.searchBar.superview == nil else { return }
 
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = SearchConstants.Texts.searchBarTitle
         searchController.searchBar.searchTextField.backgroundColor = .white
+        searchController.searchBar.placeholder = SearchConstants.Texts.searchBarTitle
         navigationItem.searchController = searchController
         definesPresentationContext = true
         searchController.searchBar.delegate = self
@@ -101,7 +109,6 @@ final class SearchViewController: UIViewController {
         stackView.axis = UIWindow.isLandscape ? .horizontal : .vertical
         stackView.spacing = SearchConstants.Insets.stackSpacing
         stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .fill
     }
 
@@ -132,11 +139,7 @@ final class SearchViewController: UIViewController {
     }
 }
 
-extension SearchViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else { return }
-    }
-}
+// MARK: - UISearchBarDelegate
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_: UISearchBar, textDidChange _: String) {}
@@ -144,6 +147,7 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text else { return }
         searchValue = text
+        errorView.removeFromSuperview()
         Task {
             await presenter?.fetchProduct(value: text)
         }
@@ -156,10 +160,20 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 
+// MARK: - SearchViewProtocol
+
 extension SearchViewController: SearchViewProtocol {
-    func showError(type _: APIError) {}
+    func showError(type: APIError) {
+        errorView.removeFromSuperview()
+        errorView = ErrorView()
+        errorView.setup(type: type)
+        errorView.delegate = self
+        view.addAutoLayout(subview: errorView)
+        Layout.pin(view: errorView, to: view)
+    }
 
     func goToItem(viewModel: SearchItemViewModel) {
+        errorView.removeFromSuperview()
         guard
             let viewController = ViewFactory(
                 serviceLocator: ProductFinderServiceLocator()
@@ -168,6 +182,7 @@ extension SearchViewController: SearchViewProtocol {
 
         viewController.viewModel = viewModel
         viewController.searchValue = searchValue
+        logger.trace("Push to List Products View")
         navigationController?.pushViewController(viewController, animated: true)
     }
 
@@ -178,6 +193,16 @@ extension SearchViewController: SearchViewProtocol {
                 return
             }
             self.showActivityIndicator()
+        }
+    }
+}
+
+// MARK: - ErrorViewDelegate
+
+extension SearchViewController: ErrorViewDelegate {
+    func didTap() {
+        Task {
+            await presenter?.fetchProduct(value: searchValue)
         }
     }
 }

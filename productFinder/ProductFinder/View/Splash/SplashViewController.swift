@@ -1,7 +1,17 @@
 import Lottie
+import os
 import UIKit
 
 final class SplashViewController: UIViewController {
+    // MARK: - Private Property
+
+    private let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier ?? Constants.empty,
+        category: String(describing: SearchViewController.self)
+    )
+
+    // MARK: - Initialization
+
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -26,7 +36,8 @@ final class SplashViewController: UIViewController {
         super.viewWillAppear(animated)
     }
 
-    // Show animation from lottie
+    // MARK: - Private Methods
+
     private func prepareAnimation() {
         let view = AnimationView()
         let path = Bundle.main.path(forResource: "SplashAnimation",
@@ -41,7 +52,6 @@ final class SplashViewController: UIViewController {
         timeWait()
     }
 
-    // Time delay to go from one view to another
     private func timeWait() {
         let when = DispatchTime.now() + 2.5
         DispatchQueue.main.asyncAfter(deadline: when) {
@@ -51,6 +61,7 @@ final class SplashViewController: UIViewController {
 
     private func showSearchView() {
         let viewController = ViewFactory(serviceLocator: ProductFinderServiceLocator()).viewController(type: .search)
+        logger.trace("Push to Search View")
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

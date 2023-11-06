@@ -1,3 +1,4 @@
+import os
 import UIKit
 
 final class ListProductsViewController: UIViewController {
@@ -8,6 +9,10 @@ final class ListProductsViewController: UIViewController {
     // swiftlint:disable:next weak_delegate
     private var delegate: ListProductsDelegate?
     private var presenter: ListProductsPresenterProtocol?
+    private let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier ?? Constants.empty,
+        category: String(describing: ListProductsViewController.self)
+    )
 
     // MARK: - Public Properties
 
@@ -15,6 +20,7 @@ final class ListProductsViewController: UIViewController {
     var selectedViewModel: ItemViewModel?
     var searchValue: String?
     var activityIndicator = UIActivityIndicatorView(style: .large)
+    var errorView = ErrorView()
 
     // MARK: - Initialization
 
@@ -50,6 +56,18 @@ final class ListProductsViewController: UIViewController {
         tableView.reloadData()
     }
 
+    override func viewWillTransition(to _: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { _ -> Void in
+            if UIWindow.isLandscape {
+                self.errorView.update(axis: .horizontal)
+            } else {
+                self.errorView.update(axis: .vertical)
+            }
+        }, completion: nil)
+    }
+
+    // MARK: - Private Methods
+
     private func setUpNavigationBar() {
         navigationController?.setNavigationBarHidden(false, animated: false)
         configureNavigationBar(
@@ -80,19 +98,32 @@ final class ListProductsViewController: UIViewController {
         tableView.register(ProductCell.self, forCellReuseIdentifier: productCellIdentifier)
     }
 
+    // MARK: - Public Method
+
     func routeToDetail(indexPath: IndexPath) {
         guard let selectedItem = viewModel?.results[indexPath.row] else { return }
         selectedViewModel = selectedItem
+        errorView.removeFromSuperview()
         Task {
             await presenter?.fetchDetailProduct(id: selectedItem.id)
         }
     }
 }
 
+// MARK: - ListProductsViewProtocol
+
 extension ListProductsViewController: ListProductsViewProtocol {
-    func showError(type _: APIError) {}
+    func showError(type: APIError) {
+        errorView.removeFromSuperview()
+        errorView = ErrorView()
+        errorView.setup(type: type)
+        errorView.delegate = self
+        view.addAutoLayout(subview: errorView)
+        Layout.pin(view: errorView, to: view)
+    }
 
     func goToSelectedProduct(itemDescriptionViewModel: ItemDescriptionViewModel) {
+        errorView.removeFromSuperview()
         guard let viewController = ViewFactory(
             serviceLocator: ProductFinderServiceLocator()
         ).viewController(type: .productDetail) as? ProductDetailViewController
@@ -100,6 +131,7 @@ extension ListProductsViewController: ListProductsViewProtocol {
 
         viewController.itemViewModel = selectedViewModel
         viewController.itemDescriptionViewModel = itemDescriptionViewModel
+        logger.trace("Push to Product Detail View")
         navigationController?.pushViewController(viewController, animated: true)
     }
 
@@ -110,6 +142,18 @@ extension ListProductsViewController: ListProductsViewProtocol {
                 return
             }
             self.showActivityIndicator()
+        }
+    }
+}
+
+// MARK: - ErrorViewDelegate
+
+extension ListProductsViewController: ErrorViewDelegate {
+    func didTap() {
+        guard let selectedViewModel else { return }
+
+        Task {
+            await presenter?.fetchDetailProduct(id: selectedViewModel.id)
         }
     }
 }

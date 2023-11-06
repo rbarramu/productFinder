@@ -31,6 +31,8 @@ class ProductCell: UITableViewCell {
         contentView.subviews.forEach { $0.removeFromSuperview() }
     }
 
+    // MARK: - Public Method
+
     func setup(viewData: ProductCellViewData) {
         self.viewData = viewData
         prepare()
@@ -48,46 +50,33 @@ class ProductCell: UITableViewCell {
     private func prepareContainer() {
         backgroundColor = .clear
         containerView.backgroundColor = .white
-        containerView.layer.cornerRadius = ProductCellConstants.cornerRadius
+        containerView.layer.cornerRadius = ProductCellConstants.Container.cornerRadius
 
         if containerView.superview == nil {
             contentView.addAutoLayout(subview: containerView)
             Layout.pin(
                 view: containerView,
                 to: contentView,
-                insets: ProductCellConstants.containerViewInset
+                insets: ProductCellConstants.Container.containerViewInset
             )
         }
     }
 
-    func prepareStackContainer() {
-        containerView.addAutoLayout(subview: stackContainer)
+    private func prepareStackContainer() {
         stackContainer.alignment = .center
         stackContainer.axis = .horizontal
         stackContainer.distribution = .fill
-        stackContainer.spacing = ProductCellConstants.stackContainerSpace
+        stackContainer.spacing = ProductCellConstants.StackContainer.stackContainerSpace
 
-        NSLayoutConstraint.activate([
-            stackContainer.leadingAnchor.constraint(
-                equalTo: containerView.leadingAnchor,
-                constant: ProductCellConstants.anchorStackContainer
-            ),
-            stackContainer.trailingAnchor.constraint(
-                equalTo: containerView.trailingAnchor,
-                constant: -ProductCellConstants.anchorStackContainer
-            ),
-            stackContainer.topAnchor.constraint(
-                equalTo: containerView.topAnchor,
-                constant: ProductCellConstants.anchorStackContainer
-            ),
-            stackContainer.bottomAnchor.constraint(
-                equalTo: containerView.bottomAnchor,
-                constant: -ProductCellConstants.anchorStackContainer
-            ),
-        ])
+        if stackContainer.superview == nil {
+            containerView.addAutoLayout(subview: stackContainer)
+            Layout.pin(
+                view: stackContainer,
+                to: containerView,
+                insets: ProductCellConstants.StackContainer.stackContainerInset
+            )
+        }
     }
-
-    // MARK: - Public Methods
 
     private func prepareImage() {
         guard let viewData, let url = URL(string: viewData.thumbnail) else { fatalError("Unable to load product") }
@@ -95,8 +84,12 @@ class ProductCell: UITableViewCell {
         stackContainer.addArrangedSubview(imageProductView)
 
         NSLayoutConstraint.activate([
-            imageProductView.heightAnchor.constraint(equalToConstant: ProductCellConstants.anchorImageProductView),
-            imageProductView.widthAnchor.constraint(equalToConstant: ProductCellConstants.anchorImageProductView),
+            imageProductView.heightAnchor.constraint(
+                equalToConstant: ProductCellConstants.Image.anchorImageProductView
+            ),
+            imageProductView.widthAnchor.constraint(
+                equalToConstant: ProductCellConstants.Image.anchorImageProductView
+            ),
         ])
 
         imageProductView.contentMode = .scaleAspectFit
@@ -108,7 +101,7 @@ class ProductCell: UITableViewCell {
         )
     }
 
-    func prepareStackViewDetail() {
+    private func prepareStackViewDetail() {
         guard let viewData else { fatalError("Unable to load product") }
 
         stackContainer.addArrangedSubview(stackViewDetail)
@@ -120,17 +113,20 @@ class ProductCell: UITableViewCell {
         stackViewDetail.alignment = .leading
         stackViewDetail.axis = .vertical
         stackViewDetail.distribution = .fill
-        stackViewDetail.spacing = ProductCellConstants.stackSpacing
+        stackViewDetail.spacing = ProductCellConstants.StackViewDetail.stackSpacing
 
         badge.text = ProductCellConstants.Text.badgeText
         badge.textColor = .white
-        badge.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        badge.font = UIFont.systemFont(ofSize: ProductCellConstants.StackViewDetail.badgeFontSize, weight: .semibold)
         badge.backgroundColor = Theme.current.blueLight
         badge.isHidden = !viewData.acceptsMercadopago
 
         titleLabel.text = viewData.title
         titleLabel.textColor = .black
-        titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        titleLabel.font = UIFont.systemFont(
+            ofSize: ProductCellConstants.StackViewDetail.titleFontSize,
+            weight: .regular
+        )
         titleLabel.numberOfLines = .zero
 
         if let originalPrice = viewData.originalPrice {
@@ -141,11 +137,17 @@ class ProductCell: UITableViewCell {
 
             originalPriceLabel.attributedText = attributedText
             originalPriceLabel.textColor = .black
-            originalPriceLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+            originalPriceLabel.font = UIFont.systemFont(
+                ofSize: ProductCellConstants.StackViewDetail.originalPriceFontSize,
+                weight: .regular
+            )
         }
 
         priceLabel.text = Formatter.format(float: viewData.price, style: .amountCLP)
         priceLabel.textColor = .black
-        priceLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        priceLabel.font = UIFont.systemFont(
+            ofSize: ProductCellConstants.StackViewDetail.priceFontSize,
+            weight: .bold
+        )
     }
 }

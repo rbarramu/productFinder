@@ -22,6 +22,8 @@ final class TitleCell: UITableViewCell {
         contentView.subviews.forEach { $0.removeFromSuperview() }
     }
 
+    // MARK: - Public Method
+
     func setup(
         viewData: TitleCellViewData,
         viewStyle: TitleCellViewStyle = TitleCellViewStyle()

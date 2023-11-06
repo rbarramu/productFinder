@@ -24,6 +24,8 @@ final class ImageCell: UITableViewCell {
         contentView.subviews.forEach { $0.removeFromSuperview() }
     }
 
+    // MARK: - Public Method
+
     func setup(viewData: ImageCellViewData) {
         self.viewData = viewData
         prepare()
