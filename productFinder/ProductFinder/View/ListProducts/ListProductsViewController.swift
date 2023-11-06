@@ -4,7 +4,6 @@ import UIKit
 final class ListProductsViewController: UIViewController {
     // MARK: - Private Properties
 
-    private let tableView = UITableView(frame: .zero)
     private var dataSource: ListProductsDataSource?
     // swiftlint:disable:next weak_delegate
     private var delegate: ListProductsDelegate?
@@ -16,6 +15,7 @@ final class ListProductsViewController: UIViewController {
 
     // MARK: - Public Properties
 
+    let tableView = UITableView(frame: .zero)
     var viewModel: SearchItemViewModel?
     var selectedViewModel: ItemViewModel?
     var searchValue: String?

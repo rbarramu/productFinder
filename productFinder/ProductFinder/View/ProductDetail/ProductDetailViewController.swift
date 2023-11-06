@@ -3,13 +3,13 @@ import UIKit
 final class ProductDetailViewController: UIViewController {
     // MARK: - Private Properties
 
-    private let tableView = UITableView(frame: .zero)
     private var dataSource: ProductDetailDataSource?
     // swiftlint:disable:next weak_delegate
     private var delegate: ProductDetailDelegate?
 
     // MARK: - Public Properties
 
+    let tableView = UITableView(frame: .zero)
     var itemViewModel: ItemViewModel?
     var itemDescriptionViewModel: ItemDescriptionViewModel?
     var activityIndicator = UIActivityIndicatorView(style: .large)
