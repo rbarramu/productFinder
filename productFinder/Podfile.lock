@@ -1,0 +1,36 @@
+PODS:
+  - Kingfisher (7.10.0)
+  - lottie-ios (3.2.3)
+  - Mimic (1.0.0)
+  - Nimble (13.0.0)
+  - SwiftFormat/CLI (0.48.11)
+  - SwiftLint (0.43.1)
+
+DEPENDENCIES:
+  - Kingfisher
+  - lottie-ios
+  - Mimic (= 1.0.0)
+  - Nimble
+  - SwiftFormat/CLI
+  - SwiftLint
+
+SPEC REPOS:
+  trunk:
+    - Kingfisher
+    - lottie-ios
+    - Mimic
+    - Nimble
+    - SwiftFormat
+    - SwiftLint
+
+SPEC CHECKSUMS:
+  Kingfisher: a18f05d3b6d37d8650ee4a3e61d57a28fc6207f6
+  lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
+  Mimic: 8704fb8e08b18874e464950aeff31caa5884f55a
+  Nimble: 97d90931cca412a23224ff29e258809f75c258f7
+  SwiftFormat: 938e5865a118c49d63c7a290ddad86335f9e585f
+  SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
+
+PODFILE CHECKSUM: 57f22478a14d55753584fea78ab38650433bfdb6
+
+COCOAPODS: 1.10.1
