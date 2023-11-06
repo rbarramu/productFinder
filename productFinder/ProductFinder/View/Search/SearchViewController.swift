@@ -1,4 +1,5 @@
 import Lottie
+import os
 import UIKit
 
 final class SearchViewController: UIViewController {
@@ -9,6 +10,10 @@ final class SearchViewController: UIViewController {
     private let titleLabel = UILabel()
     private let animationView = AnimationView()
     private var presenter: SearchPresenterProtocol?
+    private let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier ?? Constants.empty,
+        category: String(describing: SearchViewController.self)
+    )
 
     // MARK: - Public Properties
 
@@ -76,10 +81,8 @@ final class SearchViewController: UIViewController {
     private func prepareSearchController() {
         guard searchController.searchBar.superview == nil else { return }
 
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = SearchConstants.Texts.searchBarTitle
         searchController.searchBar.searchTextField.backgroundColor = .white
+        searchController.searchBar.placeholder = SearchConstants.Texts.searchBarTitle
         navigationItem.searchController = searchController
         definesPresentationContext = true
         searchController.searchBar.delegate = self
@@ -106,7 +109,6 @@ final class SearchViewController: UIViewController {
         stackView.axis = UIWindow.isLandscape ? .horizontal : .vertical
         stackView.spacing = SearchConstants.Insets.stackSpacing
         stackView.alignment = .center
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .fill
     }
 
@@ -134,14 +136,6 @@ final class SearchViewController: UIViewController {
         NSLayoutConstraint.activate([
             titleLabel.widthAnchor.constraint(equalToConstant: SearchConstants.Insets.anchorInset),
         ])
-    }
-}
-
-// MARK: - UISearchResultsUpdating
-
-extension SearchViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else { return }
     }
 }
 
@@ -188,6 +182,7 @@ extension SearchViewController: SearchViewProtocol {
 
         viewController.viewModel = viewModel
         viewController.searchValue = searchValue
+        logger.trace("Push to List Products View")
         navigationController?.pushViewController(viewController, animated: true)
     }
 

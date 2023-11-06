@@ -1,3 +1,4 @@
+import os
 import UIKit
 
 final class ListProductsViewController: UIViewController {
@@ -8,6 +9,10 @@ final class ListProductsViewController: UIViewController {
     // swiftlint:disable:next weak_delegate
     private var delegate: ListProductsDelegate?
     private var presenter: ListProductsPresenterProtocol?
+    private let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier ?? Constants.empty,
+        category: String(describing: ListProductsViewController.self)
+    )
 
     // MARK: - Public Properties
 
@@ -126,6 +131,7 @@ extension ListProductsViewController: ListProductsViewProtocol {
 
         viewController.itemViewModel = selectedViewModel
         viewController.itemDescriptionViewModel = itemDescriptionViewModel
+        logger.trace("Push to Product Detail View")
         navigationController?.pushViewController(viewController, animated: true)
     }
 
