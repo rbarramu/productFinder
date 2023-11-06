@@ -1,3 +1,3 @@
 struct SearchItem: Decodable {
-    let results: [ItemModel]
+    let results: [Item]
 }

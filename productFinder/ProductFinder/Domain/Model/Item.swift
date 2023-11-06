@@ -1,6 +1,6 @@
 import Foundation
 
-struct ItemModel: Decodable {
+struct Item: Decodable {
     let id: String
     let title: String
     let price: Float

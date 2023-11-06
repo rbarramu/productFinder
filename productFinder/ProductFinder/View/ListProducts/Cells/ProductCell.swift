@@ -84,8 +84,12 @@ class ProductCell: UITableViewCell {
         stackContainer.addArrangedSubview(imageProductView)
 
         NSLayoutConstraint.activate([
-            imageProductView.heightAnchor.constraint(equalToConstant: ProductCellConstants.Image.anchorImageProductView),
-            imageProductView.widthAnchor.constraint(equalToConstant: ProductCellConstants.Image.anchorImageProductView),
+            imageProductView.heightAnchor.constraint(
+                equalToConstant: ProductCellConstants.Image.anchorImageProductView
+            ),
+            imageProductView.widthAnchor.constraint(
+                equalToConstant: ProductCellConstants.Image.anchorImageProductView
+            ),
         ])
 
         imageProductView.contentMode = .scaleAspectFit
