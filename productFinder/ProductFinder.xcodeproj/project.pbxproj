@@ -123,6 +123,11 @@
 		3CF3FCFD2AF954B80074283A /* SearchViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF3FCFC2AF954B80074283A /* SearchViewControllerMock.swift */; };
 		3CF3FCFF2AF9576B0074283A /* ListProductsViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF3FCFE2AF9576B0074283A /* ListProductsViewControllerMock.swift */; };
 		3CF3FD012AF968F40074283A /* ProductFinderImagesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF3FD002AF968F40074283A /* ProductFinderImagesTests.swift */; };
+		3CF3FD042AF96FE30074283A /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 3CF3FD032AF96FE30074283A /* SnapshotTesting */; };
+		3CF3FD072AF970640074283A /* TitleCellSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF3FD062AF970640074283A /* TitleCellSnapshotTests.swift */; };
+		3CF3FD092AF974350074283A /* ImageCellSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF3FD082AF974350074283A /* ImageCellSnapshotTests.swift */; };
+		3CF3FD0B2AF975310074283A /* ProductCellSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF3FD0A2AF975310074283A /* ProductCellSnapshotTests.swift */; };
+		3CF3FD0D2AF977210074283A /* ErrorViewSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF3FD0C2AF977210074283A /* ErrorViewSnapshotTests.swift */; };
 		47E7895CA32376D07F69F4CF /* Pods_ProductFinderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 989C2D9AA472969D83D5665E /* Pods_ProductFinderTests.framework */; };
 		52D0FAC34C6083BF15D0607A /* Pods_ProductFinder_ProductFinderUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E507BB1979200B90D051C3 /* Pods_ProductFinder_ProductFinderUITests.framework */; };
 /* End PBXBuildFile section */
@@ -268,6 +273,10 @@
 		3CF3FCFC2AF954B80074283A /* SearchViewControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewControllerMock.swift; sourceTree = "<group>"; };
 		3CF3FCFE2AF9576B0074283A /* ListProductsViewControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListProductsViewControllerMock.swift; sourceTree = "<group>"; };
 		3CF3FD002AF968F40074283A /* ProductFinderImagesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFinderImagesTests.swift; sourceTree = "<group>"; };
+		3CF3FD062AF970640074283A /* TitleCellSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCellSnapshotTests.swift; sourceTree = "<group>"; };
+		3CF3FD082AF974350074283A /* ImageCellSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellSnapshotTests.swift; sourceTree = "<group>"; };
+		3CF3FD0A2AF975310074283A /* ProductCellSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellSnapshotTests.swift; sourceTree = "<group>"; };
+		3CF3FD0C2AF977210074283A /* ErrorViewSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewSnapshotTests.swift; sourceTree = "<group>"; };
 		615492B056FC7D1B4E24E587 /* Pods-ProductFinderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProductFinderTests.release.xcconfig"; path = "Target Support Files/Pods-ProductFinderTests/Pods-ProductFinderTests.release.xcconfig"; sourceTree = "<group>"; };
 		668128790B1C7F32F98C5839 /* Pods-ProductFinder-ProductFinderUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProductFinder-ProductFinderUITests.release.xcconfig"; path = "Target Support Files/Pods-ProductFinder-ProductFinderUITests/Pods-ProductFinder-ProductFinderUITests.release.xcconfig"; sourceTree = "<group>"; };
 		96B5AF43FE9982665FCAFFC6 /* Pods-ProductFinder-ProductFinderUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProductFinder-ProductFinderUITests.debug.xcconfig"; path = "Target Support Files/Pods-ProductFinder-ProductFinderUITests/Pods-ProductFinder-ProductFinderUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -281,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C92F80EFB225F90E00BF901 /* Pods_ProductFinder.framework in Frameworks */,
+				3CF3FD042AF96FE30074283A /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -914,6 +924,7 @@
 		3CEE90BE2AF32BEF004981EA /* ProductFinderTests */ = {
 			isa = PBXGroup;
 			children = (
+				3CF3FD052AF970350074283A /* UI */,
 				3C50C0342AF87537009F81A4 /* Core */,
 				3C50C04E2AF88224009F81A4 /* DI */,
 				3C50C04F2AF8822B009F81A4 /* Data */,
@@ -952,6 +963,17 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		3CF3FD052AF970350074283A /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				3CF3FD062AF970640074283A /* TitleCellSnapshotTests.swift */,
+				3CF3FD082AF974350074283A /* ImageCellSnapshotTests.swift */,
+				3CF3FD0A2AF975310074283A /* ProductCellSnapshotTests.swift */,
+				3CF3FD0C2AF977210074283A /* ErrorViewSnapshotTests.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		B11F843CF86153F4F7B9CE00 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -985,6 +1007,9 @@
 			dependencies = (
 			);
 			name = ProductFinder;
+			packageProductDependencies = (
+				3CF3FD032AF96FE30074283A /* SnapshotTesting */,
+			);
 			productName = ProductFinder;
 			productReference = 3CEE90A52AF32BED004981EA /* ProductFinder.app */;
 			productType = "com.apple.product-type.application";
@@ -1060,6 +1085,9 @@
 				Base,
 			);
 			mainGroup = 3CEE909C2AF32BED004981EA;
+			packageReferences = (
+				3CF3FD022AF96FE30074283A /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+			);
 			productRefGroup = 3CEE90A62AF32BED004981EA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1341,6 +1369,7 @@
 				3C50C0842AF89605009F81A4 /* FetchProductsUseCaseTests.swift in Sources */,
 				3C50C0692AF891A6009F81A4 /* SearchItem+Mock.swift in Sources */,
 				3C50C0812AF895DC009F81A4 /* FetchProductDetailMapperTests.swift in Sources */,
+				3CF3FD0B2AF975310074283A /* ProductCellSnapshotTests.swift in Sources */,
 				3C50C0412AF879CD009F81A4 /* TestCase.swift in Sources */,
 				3C50C0862AF8961A009F81A4 /* FetchProductDetailUseCaseTests.swift in Sources */,
 				3C50C0662AF88E38009F81A4 /* ProductFinderRestApiMock.swift in Sources */,
@@ -1348,6 +1377,7 @@
 				3CF3FCFD2AF954B80074283A /* SearchViewControllerMock.swift in Sources */,
 				3C50C0722AF89523009F81A4 /* SearchPresenterTests.swift in Sources */,
 				3C50C06D2AF892B6009F81A4 /* ViewFactoryTests.swift in Sources */,
+				3CF3FD072AF970640074283A /* TitleCellSnapshotTests.swift in Sources */,
 				3C50C0762AF89547009F81A4 /* ListProductsDelegateTests.swift in Sources */,
 				3C50C0742AF89536009F81A4 /* ListProductsDataSourceTests.swift in Sources */,
 				3C50C04D2AF881B2009F81A4 /* ViewAutoLayoutTests.swift in Sources */,
@@ -1361,6 +1391,8 @@
 				3C50C0632AF88D92009F81A4 /* ProductFinderApiRepositoryTests.swift in Sources */,
 				3C50C0582AF883C1009F81A4 /* ProductFinderNetworkRestApiTests.swift in Sources */,
 				3C50C06B2AF8922F009F81A4 /* ItemDescription+Mock.swift in Sources */,
+				3CF3FD092AF974350074283A /* ImageCellSnapshotTests.swift in Sources */,
+				3CF3FD0D2AF977210074283A /* ErrorViewSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1684,6 +1716,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3CF3FD022AF96FE30074283A /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3CF3FD032AF96FE30074283A /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3CF3FD022AF96FE30074283A /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3CEE909D2AF32BED004981EA /* Project object */;
 }
