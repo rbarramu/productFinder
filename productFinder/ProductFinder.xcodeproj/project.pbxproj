@@ -123,6 +123,7 @@
 		3CF3FCFD2AF954B80074283A /* SearchViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF3FCFC2AF954B80074283A /* SearchViewControllerMock.swift */; };
 		3CF3FCFF2AF9576B0074283A /* ListProductsViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF3FCFE2AF9576B0074283A /* ListProductsViewControllerMock.swift */; };
 		3CF3FD012AF968F40074283A /* ProductFinderImagesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF3FD002AF968F40074283A /* ProductFinderImagesTests.swift */; };
+		3CF3FD0F2AF9AA550074283A /* AccessibilityUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF3FD0E2AF9AA550074283A /* AccessibilityUtils.swift */; };
 		47E7895CA32376D07F69F4CF /* Pods_ProductFinderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 989C2D9AA472969D83D5665E /* Pods_ProductFinderTests.framework */; };
 		52D0FAC34C6083BF15D0607A /* Pods_ProductFinder_ProductFinderUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4E507BB1979200B90D051C3 /* Pods_ProductFinder_ProductFinderUITests.framework */; };
 /* End PBXBuildFile section */
@@ -268,6 +269,7 @@
 		3CF3FCFC2AF954B80074283A /* SearchViewControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewControllerMock.swift; sourceTree = "<group>"; };
 		3CF3FCFE2AF9576B0074283A /* ListProductsViewControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListProductsViewControllerMock.swift; sourceTree = "<group>"; };
 		3CF3FD002AF968F40074283A /* ProductFinderImagesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFinderImagesTests.swift; sourceTree = "<group>"; };
+		3CF3FD0E2AF9AA550074283A /* AccessibilityUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityUtils.swift; sourceTree = "<group>"; };
 		615492B056FC7D1B4E24E587 /* Pods-ProductFinderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProductFinderTests.release.xcconfig"; path = "Target Support Files/Pods-ProductFinderTests/Pods-ProductFinderTests.release.xcconfig"; sourceTree = "<group>"; };
 		668128790B1C7F32F98C5839 /* Pods-ProductFinder-ProductFinderUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProductFinder-ProductFinderUITests.release.xcconfig"; path = "Target Support Files/Pods-ProductFinder-ProductFinderUITests/Pods-ProductFinder-ProductFinderUITests.release.xcconfig"; sourceTree = "<group>"; };
 		96B5AF43FE9982665FCAFFC6 /* Pods-ProductFinder-ProductFinderUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProductFinder-ProductFinderUITests.debug.xcconfig"; path = "Target Support Files/Pods-ProductFinder-ProductFinderUITests/Pods-ProductFinder-ProductFinderUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -818,6 +820,7 @@
 				3CECCEFA2AF34D8A00265ABB /* Animations */,
 				3CECCEED2AF34B9500265ABB /* Components */,
 				3CECCF002AF3503C00265ABB /* Constants.swift */,
+				3CF3FD0E2AF9AA550074283A /* AccessibilityUtils.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1303,6 +1306,7 @@
 				3C606D432AF48D89000404A3 /* FetchProductsUseCase.swift in Sources */,
 				3C6211332AF5FD8E00EE4757 /* FetchProductDetailUseCase.swift in Sources */,
 				3C6211372AF5FF5C00EE4757 /* FetchProductDetailMapper.swift in Sources */,
+				3CF3FD0F2AF9AA550074283A /* AccessibilityUtils.swift in Sources */,
 				3CB7A9062AF59AE90080C0E5 /* ListProductsConstants.swift in Sources */,
 				3C50C0312AF80221009F81A4 /* ErrorViewDelegate.swift in Sources */,
 				3C606D632AF4988D000404A3 /* StubProductFinderService.swift in Sources */,

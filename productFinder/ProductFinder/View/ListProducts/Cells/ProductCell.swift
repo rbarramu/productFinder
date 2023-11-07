@@ -45,6 +45,7 @@ class ProductCell: UITableViewCell {
         prepareStackContainer()
         prepareImage()
         prepareStackViewDetail()
+        setUpAccessibility()
     }
 
     private func prepareContainer() {
@@ -76,6 +77,11 @@ class ProductCell: UITableViewCell {
                 insets: ProductCellConstants.StackContainer.stackContainerInset
             )
         }
+
+        stackContainer.isAccessibilityElement = true
+        stackContainer.shouldGroupAccessibilityChildren = true
+        stackContainer.accessibilityTraits = .button
+        stackContainer.accessibilityIdentifier = "product_cell"
     }
 
     private func prepareImage() {
@@ -149,5 +155,34 @@ class ProductCell: UITableViewCell {
             ofSize: ProductCellConstants.StackViewDetail.priceFontSize,
             weight: .bold
         )
+    }
+
+    // MARK: - SetUpAccessibility
+
+    private func setUpAccessibility() {
+        guard let viewData else { fatalError("Unable to add accessibility") }
+
+        var badgeLabel = Constants.empty
+        var originalPriceA11yLabel = Constants.empty
+        let priceA11yLabel = AccessibilityUtils.formatterForAccessibility(
+            text: "Precio ahora:" + (priceLabel.text ?? Constants.empty)
+        )
+
+        if viewData.acceptsMercadopago {
+            badgeLabel = "Acepta Mercado Pago"
+        }
+
+        if let originalPrice = viewData.originalPrice {
+            let format = Formatter.format(float: originalPrice, style: .amountCLP)
+            originalPriceA11yLabel = AccessibilityUtils.formatterForAccessibility(
+                text: "Precio anterior: \(format)"
+            )
+        }
+
+        stackContainer.accessibilityLabel = """
+        \(badgeLabel), \(viewData.title), \(originalPriceA11yLabel), \(priceA11yLabel)
+        """
+
+        imageProductView.isAccessibilityElement = false
     }
 }

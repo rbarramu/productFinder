@@ -36,6 +36,8 @@ final class ImageCell: UITableViewCell {
     private func prepare() {
         prepareContainer()
         prepareImage()
+        containerView.accessibilityElementsHidden = true
+        imageProductView.accessibilityElementsHidden = true
     }
 
     private func prepareContainer() {

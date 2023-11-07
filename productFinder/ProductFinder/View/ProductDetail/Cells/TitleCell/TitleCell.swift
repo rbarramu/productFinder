@@ -55,8 +55,16 @@ final class TitleCell: UITableViewCell {
                 attributes: [.strikethroughStyle: NSUnderlineStyle.single.rawValue]
             )
             titleLabel.attributedText = attributedText
+            titleLabel.accessibilityLabel = AccessibilityUtils.formatterForAccessibility(
+                text: "Precio anterior: \(viewData.title)"
+            )
+            titleLabel.accessibilityIdentifier = "title_cell"
         } else {
             titleLabel.text = viewData.title
+            titleLabel.accessibilityLabel = AccessibilityUtils.formatterForAccessibility(
+                text: titleLabel.text ?? Constants.empty
+            )
+            titleLabel.accessibilityIdentifier = "title_cell"
         }
 
         titleLabel.backgroundColor = .clear

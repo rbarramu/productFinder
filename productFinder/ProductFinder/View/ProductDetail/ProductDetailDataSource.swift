@@ -46,6 +46,7 @@ extension ProductDetailDataSource: UITableViewDataSource {
         )
 
         cell.setup(viewData: viewData)
+        cell.accessibilityElementsHidden = true
         return cell
     }
 
