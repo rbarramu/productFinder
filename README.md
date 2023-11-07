@@ -1,5 +1,5 @@
 # Product Finder App
-[![Swift 5](https://img.shields.io/badge/Swift-5.x-green.svg?style=flat)](https://swift.org) [![Xcode 14.2](https://img.shields.io/badge/Xcode-14.2-orange.svg?style=flat)](https://developer.apple.com/xcode/) [![CocoaPods](https://img.shields.io/badge/Cocoapods-Compatible-purple.svg?style=flat)](https://cocoapods.org/) [![Swift Package Manager](https://img.shields.io/badge/SPM-Compatible-yellow.svg?style=flat)](https://www.swift.org/package-manager/) [![License](https://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://github.com/rbarramu/productFinder/blob/main/LICENSE)
+[![Swift 5](https://img.shields.io/badge/Swift-5.x-green.svg?style=flat)](https://swift.org) [![Xcode 14.3.1](https://img.shields.io/badge/Xcode-14.3.1-orange.svg?style=flat)](https://developer.apple.com/xcode/) [![CocoaPods](https://img.shields.io/badge/Cocoapods-Compatible-purple.svg?style=flat)](https://cocoapods.org/) [![Swift Package Manager](https://img.shields.io/badge/SPM-Compatible-yellow.svg?style=flat)](https://www.swift.org/package-manager/) [![License](https://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://github.com/rbarramu/productFinder/blob/main/LICENSE)
 
 
 A simple iOS Application to search a product and view details of the product selected using MVP Architecture, Unit Test and UI Test with Snapshot.
@@ -7,7 +7,7 @@ A simple iOS Application to search a product and view details of the product sel
 
 ## Requirements
 
-* [Xcode](https://developer.apple.com/xcode/) 14.2
+* [Xcode](https://developer.apple.com/xcode/) 14.3.1
 * [SPM](https://www.swift.org/package-manager/)
 * [Cocoapods](https://cocoapods.org)
 
