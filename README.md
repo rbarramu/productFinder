@@ -1,14 +1,13 @@
 # Product Finder App
-[![Swift 5](https://img.shields.io/badge/Swift-5.x-green.svg?style=flat)](https://swift.org) [![Xcode 14.2](https://img.shields.io/badge/Xcode-14.2-orange.svg?style=flat)](https://developer.apple.com/xcode/) [![CocoaPods](https://img.shields.io/badge/Cocoapods-Compatible-purple.svg?style=flat)](https://cocoapods.org/) [![Swift Package Manager](https://img.shields.io/badge/SPM-Compatible-yellow.svg?style=flat)](https://www.swift.org/package-manager/) [![License](https://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://github.com/rbarramu/productFinder/blob/main/LICENSE)
+[![Swift 5](https://img.shields.io/badge/Swift-5.x-green.svg?style=flat)](https://swift.org) [![Xcode 14.3.1](https://img.shields.io/badge/Xcode-14.3.1-orange.svg?style=flat)](https://developer.apple.com/xcode/) [![CocoaPods](https://img.shields.io/badge/Cocoapods-Compatible-purple.svg?style=flat)](https://cocoapods.org/) [![License](https://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://github.com/rbarramu/productFinder/blob/main/LICENSE)
 
 
-A simple iOS Application to search a product and view details of the product selected using MVP Architecture, Unit Test and UI Test with Snapshot.
+A simple iOS Application to search a product and view details of the product selected using MVP Architecture and Unit Test.
 
 
 ## Requirements
 
-* [Xcode](https://developer.apple.com/xcode/) 14.2
-* [SPM](https://www.swift.org/package-manager/)
+* [Xcode](https://developer.apple.com/xcode/) 14.3.1
 * [Cocoapods](https://cocoapods.org)
 
 ## How to install
@@ -30,7 +29,6 @@ Open ProductFinder.xcworkspace and build
 
 * To follow standard in the code, it was use SwiftLint and SwiftFormat.
 * External dependencies was using with Cocoapods and SPM.
-* For UI testing it was use Snapshot (only for cells).
 * In the code there is a file named EnvironmentHelper that contains different environments. Here we can easily change the environment.
 * The stubbed environment will use the JSONS locally storage in the App.
 * To test stubbed environment, it must have the same url. For example, on the first screen, search for the word "iPhone".
@@ -55,8 +53,6 @@ It was build following Clean Architecture and MVP with Repository pattern
 * [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) - Is a code library and command-line tool for reformatting Swift code on macOS or Linux.
 
 * [SwiftLint](https://github.com/realm/SwiftLint) - Is a tool to enforce Swift style and conventions
-
-* [📸 SnapshotTesting](https://github.com/pointfreeco/swift-snapshot-testing) - Is a delightful Swift snapshot testing.
 
 * [Kingfisher](https://github.com/onevcat/Kingfisher) - Is a library for downloading and caching images from the web. It provides you a chance to use a pure-Swift way to work with remote images in your next app.
 
@@ -103,14 +99,10 @@ It was build following Clean Architecture and MVP with Repository pattern
 
 <img src="images/coverage-1.png" width="400">
 
-## Coverage Test (Unit Test + UI Test Snapshot)
-
-<img src="images/coverage-2.png" width="400">
-
 ## Tasks pendings to improve ProductFinderApp
 
 * Add CI/CD.
-* Add more Snapshot tests for ViewControllers.
+* Add Snapshot UI tests for ViewControllers and cells.
 * Manage calling the APIs from other countries (MLA, MLC, MLB).
 * Manage currency in case of calling the API from other countries.
 * Separate the components in a separate module.
