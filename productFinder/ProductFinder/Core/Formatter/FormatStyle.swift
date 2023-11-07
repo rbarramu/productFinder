@@ -1,3 +1,0 @@
-enum FormatStyle {
-    case amountCLP
-}
